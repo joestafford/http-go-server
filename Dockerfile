@@ -1,16 +1,16 @@
-FROM golang:alpine AS builder
+FROM golang:1.13 AS builder
 
-RUN apk update && apk add --no-cache git
+RUN apt update && apt install git
 
-WORKDIR $GOPATH/src/package/http-go-server/
+WORKDIR $GOPATH/src/http-go-server/
 COPY . .
 
-RUN go build -o /go/bin/http-go-server internal/main.go
+RUN go build -o /bin/http-go-server internal/main.go
 
 ############################
 
-FROM scratch
+FROM golang:1.13
 
-COPY --from=builder /go/bin/http-go-server /bin/http-go-server
+COPY --from=builder /bin/http-go-server /bin/http-go-server
 
 ENTRYPOINT ["/bin/http-go-server"]
