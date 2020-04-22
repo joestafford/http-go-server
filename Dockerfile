@@ -9,7 +9,7 @@ RUN go build -o /bin/http-go-server internal/main.go
 
 ############################
 
-FROM alpine:latest
+FROM golang:alpine
 
 COPY --from=builder /bin/http-go-server /bin/http-go-server
 
