@@ -9,7 +9,7 @@ RUN go build -o /bin/http-go-server internal/main.go
 
 ############################
 
-FROM golang:1.13
+FROM scratch
 
 COPY --from=builder /bin/http-go-server /bin/http-go-server
 
